@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Styles */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  transition: background-color 1s ease-in-out, color 1s ease-in-out, box-shadow 1s ease-in-out, border-color 1s ease-in-out; /* Slower and more visible transitions */
+}
+
+body {
+  overscroll-behavior: none;
+  @apply bg-background text-foreground;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 100, 100, 0.5) transparent;
+  transition: background-color 1s ease-in-out, color 1s ease-in-out, box-shadow 1s ease-in-out, border-color 1s ease-in-out; /* Smooth transition */
+}
+
+/* Smooth Scrolling for Webkit Browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 100, 0.4);
+  border-radius: 10px;
+  transition: background 0.5s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 100, 100, 0.6);
+}
+
+/* Dark Mode Scrollbar */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-thumb {
+    background: rgba(200, 200, 200, 0.3);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(200, 200, 200, 0.5);
+  }
+
+  .bg-overlay {
+    background-color: rgba(var(--foreground-rgb), 0.9);
+  }
+}
+
+/* Light Mode Scrollbar */
+@media (prefers-color-scheme: light) {
+  .bg-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* CSS Variables */
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 240, 5%, 96%; /* zinc-100 */
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@layer base {
+  /* Light Mode Colors */
+  :root {
+    --background: 240 5% 96%; /* zinc-100 */
+    --foreground: 0 0% 3.9%;
+    --card: 240 5% 96%; /* zinc-100 */
+    --card-foreground: 0 0% 3.9%;
+    --popover: 240 5% 96%; /* zinc-100 */
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
+  }
+
+  /* Dark Mode Colors */
+  .dark {
+    --background: 266 55% 8%; /* #1A0B2E */
+    --foreground: 0 0% 98%;
+    --card: 266 55% 11%; /* #1A0B2E */
+    --card-foreground: 0 0% 98%;
+    --popover: 266 55% 11%; /* #1A0B2E */
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 266 55% 11%; /* #1A0B2E */
+    --secondary: 266 50% 9%; /* Slightly darker variation of #1A0B2E */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 266 50% 9%; /* Muted variation of #1A0B2E */
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 266 50% 9%; /* Accent variation of #1A0B2E */
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 266 50% 9%; /* Border variation of #1A0B2E */
+    --input: 266 50% 9%; /* Input background */
+    --ring: 266 55% 15%; /* Slightly brighter for focus */
+  }
+}
+
+/* Transition effect for switching between modes */
+@keyframes mode-switch {
+  0% {
+    background-color: rgba(var(--foreground-rgb), 0.3);
+  }
+  50% {
+    background-color: rgba(var(--foreground-rgb), 0.6);
+  }
+  100% {
+    background-color: rgba(var(--foreground-rgb), 0.2);
+  }
+}
+
+/* Apply mode-switch animation to body */
+body {
+  animation: mode-switch 2s ease-in-out; /* Add the animation for smooth noticeable effect */
+}
+
+/* Overlay scaling */
+.scale-50 {
+  transform: scale(0.6); /* 50% smaller image */
+}
+
+.scale-110 {
+  transform: scale(0.8); /* 10% larger overlay */
+}
+
+/* Overlay styles */
+.bg-overlay {
+  background-color: rgba(var(--foreground-rgb), 0.2); /* Default for dark mode */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}
